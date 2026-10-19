@@ -1,0 +1,24 @@
+# Downloaded data and generated recordings
+ds003061/
+*.fif
+*.fif.gz
+*.set
+*.fdt
+
+# Local dependencies and environments
+.figure2_deps/
+.venv/
+venv/
+.github_publish/
+
+# Notebook and Python caches
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+
+# Local credentials and settings
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

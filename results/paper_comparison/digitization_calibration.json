@@ -1,0 +1,37 @@
+{
+  "figure03": {
+    "x_zero": 77.0,
+    "x_end": 677.0,
+    "x_value_end": 800.0,
+    "y_reference": 205.0,
+    "y_value_reference": 0.0,
+    "pixels_per_y_unit": 57.0,
+    "x_min": 77,
+    "x_max": 677,
+    "y_min": 8,
+    "y_max": 303,
+    "legend_x": 510,
+    "legend_y": 100,
+    "x_units": "ms",
+    "y_units": "\u00b5V",
+    "axis_anchor_uncertainty_pixels": 2
+  },
+  "figure06": {
+    "x_zero": 60.0,
+    "x_end": 717.0,
+    "x_value_end": 30.0,
+    "y_reference": 299.0,
+    "y_value_reference": 40.0,
+    "pixels_per_y_unit": 38.5,
+    "x_min": 80,
+    "x_max": 718,
+    "y_min": 12,
+    "y_max": 415,
+    "legend_x": 570,
+    "legend_y": 70,
+    "x_units": "Hz",
+    "y_units": "published log-power scale; density normalization unspecified",
+    "axis_anchor_uncertainty_pixels": 2
+  },
+  "method_note": "Column medians summarize all matching curve-colored pixels. Column pixel envelopes are saved separately; line thickness, vertical excursions and JPEG artifacts add uncertainty beyond axis-anchor placement. No author arrays are inferred."
+}

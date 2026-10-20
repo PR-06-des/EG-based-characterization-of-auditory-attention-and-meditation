@@ -1,0 +1,16 @@
+{
+  "participants": 13,
+  "recordings": 39,
+  "presented_sound_events": 28452,
+  "outside_recording_windows": 27,
+  "epoched_trials": 28425,
+  "retained_trials": 25550,
+  "flagged_run_condition_rows": 11,
+  "primary_figure_count": 12,
+  "paper_comparison_figure_count": 17,
+  "publication": {
+    "participant_level_results": "kept local",
+    "published_primary_figure_count": 11,
+    "published_paper_comparison_figure_count": 14
+  }
+}

@@ -1,0 +1,12 @@
+paper_figure,status,reason
+1,Reference only,Task illustration; original attributed asset.
+2,Layout match; mapping differs,Five local subjects shown; author P1–P5 mapping unknown. All-subject companion included.
+3,Recomputed plus approximate numerical comparison,Pz chosen explicitly; image-derived reference traces and maxima saved.
+4,Ambiguous statistic; both interpretations shown,Image: 4–30 Hz spectrum. Caption: 20 ms ERP. Author condition unknown.
+5,Ambiguous statistic; both interpretations shown,Image: 4–30 Hz spectrum. Caption: 50 ms ERP. Author condition unknown.
+6,Recomputed plus scale comparison,Reference power normalization unspecified; local PSD units are explicit.
+7,Reference only; labels missing,No local meditation/cognitive targets or author predictions.
+8,Reference only; simulation,No source simulation array/code available locally.
+9,Reference only; simulation,No source simulation array/code available locally.
+10,Reference only; simulation,No source simulation array/code available locally.
+11,Reference only; simulation,No source simulation array/code available locally.

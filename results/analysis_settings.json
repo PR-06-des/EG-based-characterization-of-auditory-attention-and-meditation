@@ -1,0 +1,59 @@
+{
+  "montage": "biosemi64",
+  "ref_channels": "average",
+  "highpass_freq": 1.0,
+  "lowpass_freq": null,
+  "epochs_tmin": -0.2,
+  "epochs_tmax": 0.8,
+  "baseline": [
+    -0.2,
+    0.0
+  ],
+  "reject_peak_to_peak": 200.0,
+  "ica_method": null,
+  "ica_n_components": null,
+  "bad_channels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "triggers": [
+    1,
+    2,
+    3
+  ],
+  "triggers_column": "trigger",
+  "components": {
+    "name": [
+      "P300"
+    ],
+    "tmin": [
+      0.25
+    ],
+    "tmax": [
+      0.5
+    ],
+    "roi": [
+      [
+        "Pz"
+      ]
+    ]
+  },
+  "average_by": {
+    "standard": "condition == \"standard\"",
+    "oddball": "condition == \"oddball\"",
+    "noise": "condition == \"noise\""
+  },
+  "n_jobs": 1,
+  "perform_tfr": false
+}

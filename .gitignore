@@ -22,3 +22,22 @@ __pycache__/
 !.env.example
 .DS_Store
 Thumbs.db
+
+# Full local processing outputs and caches
+hu_neuro_results/
+analysis_outputs/
+notebook_backups/
+*.npz
+paper_references/article.html
+
+# Participant-level exports and their individual preview plots stay local
+results/input_inventory.csv
+results/participant_peaks.csv
+results/trial_retention.csv
+results/figures/participant_peak_comparison.png
+results/figures/trial_retention.png
+results/paper_comparison/comparison_figure02.png
+results/paper_comparison/figure02_all_participants.png
+results/paper_comparison/figure02_all_participants_mapping.csv
+results/paper_comparison/figure02_five_positions.png
+results/paper_comparison/figure02_five_positions_mapping.csv

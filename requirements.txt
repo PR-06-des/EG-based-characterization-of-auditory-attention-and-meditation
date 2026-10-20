@@ -1,6 +1,12 @@
-# Direct notebook dependencies from the local Python 3.10 environment.
+# Notebook dependencies; see results/software_versions.json for the executed full-data environment.
 mne==1.12.1
 hu-neuro-pipeline==0.9.0
 openneuro-py==2026.9.1
 pandas==2.3.3
 jupyterlab==4.6.2
+
+# Explicit plotting and numerical dependencies for full-data/paper comparisons
+numpy
+scipy
+matplotlib
+Pillow

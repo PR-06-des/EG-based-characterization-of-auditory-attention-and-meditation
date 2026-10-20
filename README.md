@@ -1,36 +1,57 @@
 # EG-based-characterization-of-auditory-attention-and-meditation
 
-Exploratory EEG preprocessing and ERP analysis inspired by [the paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC12417730/).
+Full-dataset auditory oddball analysis using **hu-neuro-pipeline**, with ERP, peak, scalp-map and power-spectrum figures and comparisons with [Attar (2025)](https://pmc.ncbi.nlm.nih.gov/articles/PMC12417730/).
 
 ## Notebooks
 
-Run these in order, with Jupyter started in this repository folder:
+Start Jupyter in this repository folder. The full-dataset notebook is independent of the earlier single-recording exploration:
 
-1. **eeg exploration.ipynb** loads subject 001, run 1 from OpenNeuro ds003061, sets channel information and the BioSemi 64 montage, applies an average reference and a 1 Hz high-pass filter, fits 20 ICA components, and provides plots for artifact inspection. The last cell saves `sub-001_run-1_clean_raw.fif`.
-2. **analyisis.ipynb** loads that cleaned recording, creates epochs from -0.2 to 0.8 seconds with a -0.2 to 0 second baseline, averages standard/oddball/noise trials, compares standard and oddball ERPs at Pz, and plots oddball scalp maps at 100, 200, 350, and 500 ms.
+1. **[figure replications.ipynb](figure%20replications.ipynb)** processes all 13 participants and 39 runs through `hu-neuro-pipeline.group_pipeline()`. It produces participant and grand averages, QC summaries, 12 primary figure sets and 17 paper-style comparison figures. Its final section can run independently against saved local library outputs.
+2. **eeg exploration.ipynb** is the earlier subject 001/run 1 preprocessing exploration. It sets the BioSemi64 montage and average reference, applies a 1 Hz high-pass, and provides interactive ICA inspection. Its final cell saves `sub-001_run-1_clean_raw.fif`.
+3. **analyisis.ipynb** analyzes that single cleaned recording, comparing sound-condition ERPs and scalp maps.
 
 The analysis filename retains its original spelling.
 
 ## Setup
 
-Python 3.10 was used for the local notebook work. Create and activate a virtual environment, then run:
+Create and activate a Python environment, then run:
 
 ```sh
 python -m pip install -r requirements.txt
 python -m jupyterlab
 ```
 
-Select that environment as the notebook kernel. The notebooks also contain installation cells retained from the original workflow; these are optional after installing the requirements.
+Select that environment as the notebook kernel. The existing dependency pins retain the original notebook environment; exact versions used for the completed full-data run are recorded in [results/software_versions.json](results/software_versions.json). Notebook installation cells are optional after installing requirements.
 
-The first notebook downloads subject 001 if its `.set` file is missing. Keep both the EEGLAB `.set` file and any companion data files together. Raw data and the generated cleaned FIF file are not tracked in Git.
+Download the full dataset for the group notebook:
+
+```sh
+python -c "import openneuro; openneuro.download(dataset='ds003061', target_dir='ds003061')"
+```
+
+Keep `.set` files and any companion `.fdt` files together. The full-data notebook creates numeric-trigger FIF inputs, matching trial logs and library derivatives under `hu_neuro_results/`. Allow several GB for source data and derivatives. Set `PROJECT_DIR` if the kernel starts outside the repository. Leave `RUN_PROCESSING=True` for the first run and after settings/input changes; use `False` to redraw existing results. The paper section has its own small channel-PSD cache.
+
+The single-recording exploration can download subject 001 alone. Raw EEG, prepared inputs, FIF derivatives, caches, local backups and participant-level result exports are excluded from Git. Group-level PNG figures and aggregate CSV summaries from the executed analysis are included under [results/](results/README.md). Participant-specific reports and their preview plots are generated locally by the notebook.
 
 ## Data and interpretation
 
 Data: **EEG data from an auditory oddball task**, Arnaud Delorme, [OpenNeuro ds003061, snapshot 1.1.2](https://openneuro.org/datasets/ds003061/versions/1.1.2), DOI [10.18112/openneuro.ds003061.v1.1.2](https://doi.org/10.18112/openneuro.ds003061.v1.1.2).
 
-- The `Temp` channel is treated as a miscellaneous channel rather than a scalp EEG electrode.
-- ICA exclusions `[0, 4, 6]` are the current exploratory selection. Component numbering can change when ICA is fitted again; inspect the component plots and overlays before using those exclusions. The ICA fit currently has no fixed random seed.
+- The group workflow uses exactly the 64 scalp channels; auxiliary sensors, including `Temp`, do not enter its reference or averages.
+- Group settings are average reference, 1 Hz high-pass, no low-pass, -200 to 800 ms epochs, -200 to 0 ms baseline and 200 microvolt peak-to-peak rejection. ICA is disabled in the group run. Settings are explicit in the notebook and [results/analysis_settings.json](results/analysis_settings.json).
+- ICA exclusions `[0, 4, 6]` belong to the earlier single-recording exploration. Component numbering can change when ICA is fitted again; review the component plots and overlays before using those exclusions.
 - Response-tagged sound annotations are grouped with their sound condition, including the dataset spelling `reponse`.
-- This is a single-subject, single-run exploration. It does not reproduce the paper's participant-level figures or its meditation classification results. The available task annotations do not label meditation versus cognitive states.
+- The library pools runs within each participant before averaging participants equally. Its saved epochs omit the endpoint sample, giving 256 time points. PSDs are averaged in linear power before conversion to dB.
+- The run retained 25,550 of 28,425 epoched trials. Another 27 sound windows extend beyond recording edges. Eleven run/condition rows are flagged for QC review. See [results/run_summary.json](results/run_summary.json); detailed participant-level QC remains local.
 
-Notebook outputs are cleared in the uploaded copies. Original local notebooks and their saved outputs were preserved. File paths were made relative, and a final save cell was added to connect the two notebooks. Downloaded data, local package installations, and generated recordings are excluded.
+## Paper comparisons
+
+The paper section matches layouts and shows numerical differences. It includes attributed original images, approximate image-digitized waveform/spectrum traces, five-position and all-participant bar panels, and both ERP and spectrum interpretations of the ambiguous maps. [Figure-by-figure status](results/paper_comparison/reproduction_status.csv) records what can be compared. Bar panels with individual participant measurements and their mappings remain local; the published previews show group-level comparisons.
+
+![Published and recomputed ERP waveforms](results/paper_comparison/comparison_figure03.png)
+
+These are layout comparisons rather than a verified numerical reproduction. Author-specific cleaning decisions, the ERP plotting channel and the five-position participant mapping are incompletely specified. Figures 4-5 have spectral image titles and ERP captions. Meditation/cognitive state labels and author classifier predictions are unavailable locally; Figures 8-11 are labeled simulations. The notebook retains those images as references.
+
+Original paper images are credited to Attar ET (2025), *Frontiers in Human Neuroscience* 19:1616456, [doi:10.3389/fnhum.2025.1616456](https://doi.org/10.3389/fnhum.2025.1616456), under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [paper_references/README.md](paper_references/README.md) and its source/hash manifest. Digitized traces are approximate image measurements; published and local PSD normalization are not assumed interchangeable.
+
+Uploaded notebook outputs are cleared for readable version control. The executed local notebooks and their outputs are preserved locally; committed PNG previews and numerical reports provide the completed results.
